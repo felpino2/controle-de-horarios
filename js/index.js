@@ -4,6 +4,7 @@ const dataAtual = document.getElementById("data-atual");
 const horaAtual = document.getElementById("hora-atual");
 
 function updateContentHour() {
+    diaSemana.textContent = getWeekday();
     dataAtual.textContent = getCurrentDate();
     horaAtual.textContent = getCurrentTime();
 }
@@ -20,8 +21,16 @@ function getCurrentDate(){
     const date = new Date();
     return date.toLocaleDateString("pt-br");
 }
+function getWeekday(){
+    const weekday = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+    const d = new Date();
+    return weekday[d.getDay()];
+}
+
+
 
 setInterval(updateContentHour,1000);
 
+console.log(getWeekday());
 console.log(getCurrentTime());
 console.log(getCurrentDate());
