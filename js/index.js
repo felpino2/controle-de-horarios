@@ -1,3 +1,8 @@
+navigator.geolocation.getCurrentPosition((position) => {
+    console.log(position);
+    console.log(position.coords.latitude);
+    console.log(position.coords.longitude);
+});
 
 const diaSemana = document.getElementById("dia-semana");
 const dataAtual = document.getElementById("data-atual");
@@ -6,8 +11,31 @@ const btnRegistrarPonto = document.getElementById("btn-registrar-ponto")
 
 btnRegistrarPonto.addEventListener("click", register);
 
+
+
+const dialogPonto = document.getElementById("dialog-ponto");
+
+const dialogData = document.getElementById("dialog-data");
+dialogData.textContent = getCurrentDate();
+
+const dialogHora = document.getElementById("dialog-hora");
+dialogHora.textContent = getCurrentTime();
+
+
+const btnDialogEntrada = document.getElementById("btn-dialog-entrada");
+btnDialogEntrada.addEventListener("click", () => {
+    // recuperar informações 
+    // data, hora, localização (lat, long), tipo: entrada
+    // salvar essas informações num objeto Javascript
+})
+
+const btnDialogFechar = document.getElementById("dialog-fechar");
+btnDialogFechar.addEventListener("click", () => {
+    dialogPonto.close();
+})
+
 function register() {
-    alert("Bater ponto!");
+    dialogPonto.showModal();
 }
 
 function updateContentHour() {
