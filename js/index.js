@@ -1,8 +1,13 @@
+
+function getUserLocation(){
 navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position);
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
-});
+    let userLocation = {    
+            lat: position.coords.latitude,
+            long: position.coords.longitude
+        }
+        return userLocation;
+    });
+}
 
 const diaSemana = document.getElementById("dia-semana");
 const dataAtual = document.getElementById("data-atual");
@@ -23,20 +28,45 @@ dialogHora.textContent = getCurrentTime();
 
 
 const btnDialogEntrada = document.getElementById("btn-dialog-entrada");
-btnDialogEntrada.addEventListener("click", () => {
-    // recuperar informações 
-    // data, hora, localização (lat, long), tipo: entrada
-    // salvar essas informações num objeto Javascript
+btnDialogEntrada.addEventListener("click", () => { //arrow function quando é clicado, chama essa função, mesma coisa de function() {...}, função anonima sem nome
+
+    saveRegisterLocalStorage(JSON.stringify(getObjectRegister("ENTRADA")));
 })
+
+const btnDialogSaida = document.getElementById("btn-dialog-saida");
+btnDialogSaida.addEventListener("click", () => {
+    saveRegisterLocalStorage(JSON.stringify(getObjectRegister("SAÍDA")));
+})
+
+function getObjectRegister(registerType){
+    ponto = {
+        "date": getCurrentDate(),
+        "time": getCurrentTime(),
+        "location": getUserLocation(),
+        "id": 1,
+        "type": registerType
+    }
+    return ponto;
+}
 
 const btnDialogFechar = document.getElementById("dialog-fechar");
 btnDialogFechar.addEventListener("click", () => {
     dialogPonto.close();
 })
 
+function saveRegisterLocalStorage(register) {
+    localStorage.setItem("register", register)
+}
+
+function getRegisterLocalStorage(key){
+    //getItem(chave)
+}
+
 function register() {
     dialogPonto.showModal();
 }
+
+
 
 function updateContentHour() {
     horaAtual.textContent = getCurrentTime();
