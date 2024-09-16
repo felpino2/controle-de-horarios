@@ -9,12 +9,19 @@ navigator.geolocation.getCurrentPosition((position) => {
     });
 }
 
+
+
+
 const diaSemana = document.getElementById("dia-semana");
 const dataAtual = document.getElementById("data-atual");
 const horaAtual = document.getElementById("hora-atual");
 const btnRegistrarPonto = document.getElementById("btn-registrar-ponto")
 
+
+
+
 btnRegistrarPonto.addEventListener("click", register);
+
 
 
 
@@ -27,16 +34,55 @@ const dialogHora = document.getElementById("dialog-hora");
 dialogHora.textContent = getCurrentTime();
 
 
+
+/*
 const btnDialogEntrada = document.getElementById("btn-dialog-entrada");
 btnDialogEntrada.addEventListener("click", () => { //arrow function quando é clicado, chama essa função, mesma coisa de function() {...}, função anonima sem nome
 
-    saveRegisterLocalStorage(JSON.stringify(getObjectRegister("ENTRADA")));
+    saveRegisterLocalStorage(getObjectRegister("Entrada"));
 })
 
 const btnDialogSaida = document.getElementById("btn-dialog-saida");
 btnDialogSaida.addEventListener("click", () => {
-    saveRegisterLocalStorage(JSON.stringify(getObjectRegister("SAÍDA")));
+    saveRegisterLocalStorage(getObjectRegister("Saída"));
 })
+
+*/
+
+const selectRegisterType = document.getElementById("register-type");
+
+const btnDialogRegister = document.getElementById("btn-dialog-register");
+btnDialogRegister.addEventListener("click", () => {
+
+    let register = getObjectRegister(selectRegisterType.value);
+    saveRegisterLocalStorage(register);
+
+    localStorage.setItem("lastRegisterType", selectRegisterType.value);
+    setRegisterType()
+
+    dialogPonto.close();
+});
+
+
+function setRegisterType(){
+    let lastType = localStorage.getItem("lastRegisterType");
+    if (lastType == "entrada") {
+        selectRegisterType.value = "intervalo";
+    }
+    if (lastType == "intervalo") {
+        selectRegisterType.value = "volta-intervalo";
+    }
+    if (lastType == "volta-intervalo") {
+        selectRegisterType.value = "saida";
+    }
+    if (lastType == "saida") {
+        selectRegisterType.value = "entrada";
+    }
+}
+
+
+
+
 
 function getObjectRegister(registerType){
     ponto = {
@@ -54,17 +100,32 @@ btnDialogFechar.addEventListener("click", () => {
     dialogPonto.close();
 })
 
+
+
+
+let registerLocalStorage = getRegisterLocalStorage("register");
+
 function saveRegisterLocalStorage(register) {
-    localStorage.setItem("register", register)
+
+    registerLocalStorage.push(register);
+    localStorage.setItem("register", JSON.stringify(registerLocalStorage));
 }
 
 function getRegisterLocalStorage(key){
-    //getItem(chave)
+    let registers = localStorage.getItem(key);
+
+    if(!registers) {
+        return [];
+    }
+
+    return JSON.parse(registers);
+
 }
 
 function register() {
     dialogPonto.showModal();
 }
+
 
 
 
@@ -94,6 +155,7 @@ function getWeekday(){
     const d = new Date();
     return weekday[d.getDay()];
 }
+
 
 
 updateContentHour();
