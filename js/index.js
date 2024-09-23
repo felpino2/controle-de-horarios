@@ -18,6 +18,7 @@ btnRegistrarPonto.addEventListener("click", register);
 
 
 
+
 const dialogPonto = document.getElementById("dialog-ponto");
 
 const dialogData = document.getElementById("dialog-data");
@@ -68,6 +69,7 @@ function register() {
 
 
 
+
 function updateContentHour() {
     horaAtual.textContent = getCurrentTime();
 }
@@ -80,7 +82,6 @@ function getCurrentTime(){
     const date = new Date();
     return String(date.getHours()).padStart(2, '0') + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
 }
-
 
 //retorna a data atual no padrão dd/mm/yyyy
 function getCurrentDate(){
