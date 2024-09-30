@@ -103,3 +103,22 @@ dialog {
     color: red;
     font-size: 100px;
 }
+
+#alerta-ponto-registrado{
+    border: 1px solid red;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.3rem;
+    padding: 5px;
+    background-color: green;
+    color: white;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+}
