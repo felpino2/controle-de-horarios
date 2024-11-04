@@ -10,16 +10,13 @@
     <div class="data-hora">
         <p id="dia-semana"></p>
         <p id="data-atual"></p>
-        <div id="clock-container">
-            <p id="hora-atual"></p>
-        </div>
+        <p id="hora-atual"></p>
     </div>
-    <div class="button-container">
-        <button id="btn-registrar-ponto">REGISTRAR PONTO</button>
-    </div>
+    <button id="btn-registrar-ponto">Registrar ponto</button>
+
     <dialog id="dialog-ponto">
-        <p id="dialog-data">Data</p>
-        <p id="dialog-hora">Hora</p>
+        <p id="dialog-data"></p>
+        <p id="dialog-hora"></p>
         <select name="register-type" id="register-type">
             <option value="entrada">Entrada</option>
             <option value="intervalo">Intervalo</option>
@@ -27,13 +24,14 @@
             <option value="saida">Saída</option>
         </select>
         <button id="btn-dialog-register">Registrar</button>
-        <p id="dialog-ultimo-registro">Aqui Último Registro</p>
+        <p id="dialog-ultimo-registro"></p>
         <button id="dialog-fechar">X</button>
     </dialog>
 
     <div id="alerta-ponto-registrado" class="hidden">
-        <p>Ponto Registrado!</p>
+        <p>Ponto registrado com sucesso!</p>
     </div>
+
 
     <script src="js/index.js"></script>
 </body>
